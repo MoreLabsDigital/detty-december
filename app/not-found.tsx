@@ -1,0 +1,1 @@
+import Link from 'next/link';export default function NotFound(){return <main className="interior admin-placeholder"><h1>WRONG TURN.</h1><p>That event is not on the board.</p><Link className="button dark" href="/explore">EXPLORE EVENTS ↗</Link></main>}
