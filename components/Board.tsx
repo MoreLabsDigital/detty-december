@@ -90,7 +90,7 @@ export function Board() {
   return (
     <section id="board" ref={wrap} className="board-section">
       <div className="section-kicker">
-        02 / YOUR MONTH STARTS HERE <span>↘</span>
+        02 / YOUR MONTH STARTS HERE 
       </div>
       <div className="board-heading">
         <div>
@@ -208,7 +208,7 @@ export function Board() {
             <br />
             GOOD
             <br />
-            STUFF ↗
+            STUFF 
           </div>
           <div className="board-decoration deco-two">
             NO
@@ -267,7 +267,7 @@ export function Board() {
                   events.map((e) => <EventCard key={e.id} event={e} compact />)
                 ) : (
                   <div className="empty-day">
-                    <span>✳</span>
+                    {/* <span>✳</span> */}
                     <h3>IT&apos;S A BLANK CANVAS.</h3>
                     <p>
                       No demonstration events on this date. Try another square or explore the
@@ -280,7 +280,7 @@ export function Board() {
                         router.push('/explore');
                       }}
                     >
-                      EXPLORE ALL EVENTS ↗
+                      EXPLORE ALL EVENTS 
                     </button>
                   </div>
                 )}
