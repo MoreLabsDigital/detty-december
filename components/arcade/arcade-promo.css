@@ -1,0 +1,122 @@
+.arcade-promo {
+  background: #fff0db;
+  border-block: 3px solid #101010;
+  padding: clamp(28px, 6vw, 85px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 35px;
+  overflow: hidden;
+  color: #101010;
+}
+.arcade-promo h2 {
+  font-size: clamp(45px, 6vw, 100px);
+  line-height: 0.96;
+  letter-spacing: -0.075em;
+  margin: 20px 0;
+  font-weight: 950;
+}
+.arcade-promo h2 em,
+.arcade-rank-head em,
+.arcade-page-head em {
+  color: #f36dbb;
+  font-style: normal;
+}
+.arcade-promo-copy > p {
+  max-width: 470px;
+  font-size: 17px;
+  line-height: 1.55;
+}
+.arcade-promo .arcade-tagline {
+  font-weight: 900;
+  font-size: 20px;
+}
+.arcade-kicker {
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+.arcade-primary {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffd84d;
+  border: 2px solid #101010;
+  box-shadow: 5px 5px 0 #101010;
+  color: #101010;
+  text-decoration: none;
+  font-weight: 900;
+  padding: 15px 23px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+.arcade-promo-right {
+  min-width: 0;
+}
+.arcade-preview {
+  background: #f36dbb;
+  border: 3px solid #101010;
+  padding: 18px;
+  box-shadow: 7px 7px 0 #101010;
+  transform: rotate(1deg);
+}
+.arcade-preview > span,
+.arcade-preview > strong {
+  font-size: 13px;
+  font-weight: 900;
+}
+.arcade-preview-grid {
+  position: relative;
+  height: 180px;
+  margin: 12px 0;
+  background:
+    repeating-linear-gradient(0deg, #15291c11 0 1px, transparent 1px 18px),
+    repeating-linear-gradient(90deg, #15291c11 0 1px, transparent 1px 18px),
+    #cbdf9f;
+  border: 4px solid #101010;
+}
+.arcade-preview-grid i {
+  position: absolute;
+  width: 27px;
+  height: 27px;
+  background: #263b2b;
+  left: 35%;
+  top: 45%;
+}
+.arcade-preview-grid .snake-b {
+  left: calc(35% + 27px);
+}
+.arcade-preview-grid .snake-c {
+  left: calc(35% + 54px);
+}
+.arcade-preview-grid .snake-d {
+  left: calc(35% + 81px);
+  border-radius: 8px 8px 8px 2px;
+}
+.arcade-preview-grid .snake-food {
+  left: 72%;
+  top: 24%;
+  background: none;
+  color: #e43d6b;
+  font-size: 30px;
+  font-style: normal;
+}
+.arcade-promo .arcade-leaderboard {
+  margin-top: 24px;
+}
+.arcade-promo .arcade-rank-head h2 {
+  font-size: 26px;
+  letter-spacing: -0.04em;
+  margin: 8px 0;
+}
+.arcade-promo .arcade-rank-head p {
+  display: none;
+}
+@media (max-width: 800px) {
+  .arcade-promo {
+    grid-template-columns: 1fr;
+    padding: 35px 20px;
+  }
+  .arcade-preview {
+    transform: none;
+  }
+}

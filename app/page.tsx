@@ -2,7 +2,9 @@ import Link from "next/link";
 import { Hero } from "@/components/Hero";
 import { Board } from "@/components/Board";
 import { EVENTS } from "@/lib/events";
+import { FaStarOfLife } from "react-icons/fa6";
 import { EventCard } from "@/components/EventCard";
+import { ArcadeSection } from "@/components/arcade/ArcadeSection";
 
 
 const ITEMS = [
@@ -15,8 +17,11 @@ const ITEMS = [
 const Sequence = () => (
   <div className="marquee__group" aria-hidden="true">
     {ITEMS.map((item, i) => (
-      <span key={i}>
-        {item} <span aria-hidden="true">✳</span>
+      <span key={i} className="marquee__item">
+        {item}
+        <span className="marquee__icon" aria-hidden="true">
+          <FaStarOfLife />
+        </span>
       </span>
     ))}
   </div>
@@ -33,7 +38,10 @@ export default function Home() {
       </div>
     </div>
       <Board />
-      <section className="discover">
+
+<ArcadeSection />
+
+<section className="discover">
         <div className="section-kicker">
           03 / FIND YOUR KIND OF DETTY 
         </div>

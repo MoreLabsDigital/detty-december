@@ -326,11 +326,20 @@ em {
   animation-play-state: paused;
 }
 .marquee__group {
-  display: inline-flex;
+  display: flex;
   flex-shrink: 0;
 }
+
 .marquee__group > span {
+  display: flex;          /* makes text + icon a flex row */
+  align-items: center;    /* vertically centers the star */
+  gap: 0.5em;             /* space between text and star */
   padding-inline: 0.5em;
+}
+
+.marquee__icon {
+  display: flex;          /* lets the SVG size/align correctly */
+  align-items: center;
 }
 @keyframes marquee {
   from {

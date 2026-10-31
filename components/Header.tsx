@@ -15,6 +15,9 @@ export function Header() {
         <Link onClick={() => setOpen(false)} href="/#board">
           THE BOARD
         </Link>
+        <Link onClick={() => setOpen(false)} href="/play">
+          PLAY
+        </Link>
         <Link onClick={() => setOpen(false)} href="/explore">
           EXPLORE
         </Link>
@@ -49,10 +52,10 @@ export function Footer() {
       <p>Find your people. Make your plans. Live your December.</p>
       <div className="footer-actions">
         <Link href="/explore" className="button light">
-          EXPLORE EVENTS 
+          EXPLORE EVENTS
         </Link>
         <Link href="/plans" className="button outline-light">
-          BUILD MY ITINERARY 
+          BUILD MY ITINERARY
         </Link>
       </div>
       <div className="footer-bottom">

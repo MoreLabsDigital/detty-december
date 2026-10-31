@@ -31,7 +31,7 @@ export default function PlansPage() {
           <em>ALL PLANNED.</em>
         </h1>
         <p>A little planning. A lot of unforgettable moments.</p>
-        <div className="floating-asterisk">✳</div>
+        
       </div>
       <div className="content-pad">
         <div className="plans-stats">
@@ -82,7 +82,7 @@ export default function PlansPage() {
           <p>Loading your saved plans…</p>
         ) : !events.length ? (
           <div className="empty-day">
-            <span>✳</span>
+            
             <h3>YOUR STORY STARTS HERE.</h3>
             <p>
               Nothing planned yet. Explore the board and add some adventures to

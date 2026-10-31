@@ -5,7 +5,7 @@ export default function NotFound() {
       <h1>WRONG TURN.</h1>
       <p>That event is not on the board.</p>
       <Link className="button dark" href="/explore">
-        EXPLORE EVENTS ↗
+        EXPLORE EVENTS 
       </Link>
     </main>
   );
