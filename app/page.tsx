@@ -6,13 +6,7 @@ import { FaStarOfLife } from "react-icons/fa6";
 import { EventCard } from "@/components/EventCard";
 import { ArcadeSection } from "@/components/arcade/ArcadeSection";
 
-
-const ITEMS = [
-  "GOOD MUSIC",
-  "GOOD PEOPLE",
-  "GOOD TIMES",
-  "LAGOS IN DECEMBER",
-];
+const ITEMS = ["GOOD MUSIC", "GOOD PEOPLE", "GOOD TIMES", "LAGOS IN DECEMBER"];
 
 const Sequence = () => (
   <div className="marquee__group" aria-hidden="true">
@@ -31,20 +25,18 @@ export default function Home() {
   return (
     <main>
       <Hero />
-        <div className="marquee" aria-hidden="true">
-      <div className="marquee__track">
-        <Sequence />
-        <Sequence />
+      <div className="marquee" aria-hidden="true">
+        <div className="marquee__track">
+          <Sequence />
+          <Sequence />
+        </div>
       </div>
-    </div>
       <Board />
 
-<ArcadeSection />
+      <ArcadeSection />
 
-<section className="discover">
-        <div className="section-kicker">
-          03 / FIND YOUR KIND OF DETTY 
-        </div>
+      <section className="discover">
+        <div className="section-kicker">03 / FIND YOUR KIND OF DETTY</div>
         <div className="discover-intro">
           <h2>
             THE CITY
@@ -65,7 +57,7 @@ export default function Home() {
         </div>
         <div className="discover-footer">
           <Link className="button dark" href="/explore">
-            EXPLORE ALL EVENTS 
+            EXPLORE ALL EVENTS
           </Link>
           <span>MORE PLANS. MORE MEMORIES. MORE DETTY.</span>
         </div>
@@ -82,11 +74,9 @@ export default function Home() {
             <br />
             <i>MORE</i> LIVING.
           </h2>
-          <Link href="/plans">
-            MAKE YOUR PLAN 
-          </Link>
+          <Link href="/plans">MAKE YOUR PLAN</Link>
         </div>
-        <div className="banner-spark">✷</div>
+        {/* <div className="banner-spark">✷</div> */}
       </section>
     </main>
   );

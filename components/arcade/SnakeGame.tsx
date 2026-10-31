@@ -21,8 +21,11 @@ function beep(
 ) {
   if (!enabled) return;
   try {
-    const w = window as Window & { webkitAudioContext?: typeof AudioContext };
-    const Audio = w.AudioContext || w.webkitAudioContext;
+    const w = window as Window & {
+  webkitAudioContext?: typeof AudioContext;
+};
+
+const Audio = window.AudioContext ?? w.webkitAudioContext;
     if (!Audio) return;
     const ctx = new Audio();
     const o = ctx.createOscillator(),

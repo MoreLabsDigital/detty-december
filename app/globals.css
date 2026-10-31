@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
+@import "../components/arcade/arcade-promo.css";
 
 :root {
   --ink: #101010;
@@ -62,7 +63,7 @@ em {
   font-style: normal;
   color: var(--pink);
 }
-.site-header {
+/* .site-header {
   height: 76px;
   display: flex;
   justify-content: space-between;
@@ -118,6 +119,317 @@ em {
   background: transparent;
   color: white;
   border: 0;
+} */
+
+/* ─────────────────────────────────────────────
+   HEADER (dd-)
+   Uses the site's own tokens: --ink --cream --pink --teal --yellow --blue --orange
+   ───────────────────────────────────────────── */
+.dd-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.dd-header {
+  position: fixed;
+  top: 14px;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding-inline: 4.5%;
+  color: var(--cream);
+  pointer-events: none;
+}
+.dd-header :focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 3px;
+}
+.dd-bar {
+  pointer-events: auto;
+  position: relative;
+  max-width: 1240px;
+  height: 64px;
+  margin-inline: auto;
+  padding: 0 10px 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 26px;
+  border-radius: 18px;
+  background: rgba(16, 16, 16, 0.4);
+  border: 1.5px solid rgba(255, 240, 219, 0.22);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 240, 219, 0.18),
+    0 12px 36px -14px rgba(0, 0, 0, 0.55);
+  transition:
+    background 0.35s,
+    box-shadow 0.35s;
+}
+.dd-header[data-scrolled="true"] .dd-bar {
+  background: rgba(16, 16, 16, 0.64);
+}
+.dd-bar::after {
+  /* the site's palette as a strip, inset so it follows the rounded corners */
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--pink) 0 20%,
+    var(--teal) 20% 40%,
+    var(--yellow) 40% 60%,
+    var(--orange) 60% 80%,
+    var(--blue) 80% 100%
+  );
+}
+
+.dd-brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex-shrink: 0;
+}
+.dd-mark {
+  width: 38px;
+  height: 38px;
+  transition: transform 0.45s steps(4);
+}
+.dd-brand:hover .dd-mark {
+  transform: rotate(90deg);
+}
+.dd-wordmark {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 800;
+  font-size: 23px;
+  letter-spacing: -0.075em;
+  white-space: nowrap;
+}
+
+.dd-nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.dd-nav > a {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  height: 40px;
+  padding: 0 16px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.dd-nav > a[data-lit="true"] {
+  color: var(--ink);
+}
+.dd-glider {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 40px;
+  width: 0;
+  background: var(--yellow);
+  box-shadow: 3px 3px 0 var(--pink);
+  opacity: 0;
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.7, 0.1, 1),
+    width 0.4s cubic-bezier(0.2, 0.7, 0.1, 1),
+    opacity 0.2s;
+}
+.dd-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  background: var(--pink);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.dd-cta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--yellow);
+  color: var(--ink);
+  border: 2px solid var(--yellow);
+  font-size: 11px;
+  font-weight: 900;
+  padding: 11px 16px;
+  white-space: nowrap;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+.dd-cta:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 5px 5px 0 var(--pink);
+}
+
+.dd-burger {
+  display: none;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  place-items: center;
+  background: transparent;
+  color: var(--cream);
+  border: 2px solid var(--cream);
+  transition: background 0.2s, color 0.2s;
+}
+.dd-burger[data-open="true"] {
+  background: var(--yellow);
+  color: var(--ink);
+  border-color: var(--yellow);
+}
+
+/* ─────────────────────────────────────────────
+   MOBILE MENU: colour blocks that slide in
+   ───────────────────────────────────────────── */
+.dd-sheet {
+  display: none;
+}
+@media (max-width: 860px) {
+  .dd-header {
+    top: 10px;
+    padding-inline: 12px;
+  }
+  .dd-nav,
+  .dd-cta {
+    display: none;
+  }
+  .dd-burger {
+    display: grid;
+  }
+  .dd-bar {
+    height: 60px;
+    padding: 0 7px 0 12px;
+    border-radius: 16px;
+  }
+  .dd-bar::after {
+    left: 16px;
+    right: 16px;
+  }
+  .dd-mark {
+    width: 34px;
+    height: 34px;
+  }
+  .dd-wordmark {
+    font-size: 19px;
+  }
+  .dd-burger {
+    width: 44px;
+    height: 44px;
+    border-radius: 11px;
+  }
+  .dd-sheet {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    padding-top: 84px;
+    background: var(--ink);
+    overflow-y: auto;
+    /* grows out of the menu button */
+    clip-path: circle(0 at calc(100% - 41px) 40px);
+    visibility: hidden;
+    transition:
+      clip-path 0.6s cubic-bezier(0.2, 0.7, 0.1, 1),
+      visibility 0s 0.6s;
+  }
+  .dd-sheet[data-open="true"] {
+    clip-path: circle(150% at calc(100% - 41px) 40px);
+    visibility: visible;
+    transition:
+      clip-path 0.75s cubic-bezier(0.2, 0.7, 0.1, 1),
+      visibility 0s;
+  }
+  .dd-sheet nav {
+    display: grid;
+    flex: 1;
+    grid-auto-rows: minmax(0, 1fr);
+  }
+  .dd-sheet nav a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 5%;
+    color: var(--ink);
+    border-bottom: 3px solid var(--ink);
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 800;
+    font-size: clamp(42px, 13vw, 84px);
+    letter-spacing: -0.07em;
+    line-height: 1;
+    transform: translateX(-102%);
+    transition: transform 0.3s;
+  }
+  .dd-sheet[data-open="true"] nav a {
+    transform: none;
+    transition: transform 0.55s cubic-bezier(0.2, 0.7, 0.1, 1) calc(0.18s + var(--i) * 70ms);
+  }
+  .dd-sheet nav a:nth-child(1) {
+    background: var(--pink);
+  }
+  .dd-sheet nav a:nth-child(2) {
+    background: var(--teal);
+  }
+  .dd-sheet nav a:nth-child(3) {
+    background: var(--yellow);
+  }
+  .dd-sheet nav a:nth-child(4) {
+    background: var(--orange);
+  }
+  .dd-sheet nav a[aria-current="page"] span::before {
+    content: "✳";
+    margin-right: 0.22em;
+  }
+  .dd-sheet .dd-count {
+    min-width: 36px;
+    height: 36px;
+    font-size: 16px;
+    background: var(--cream);
+    border-width: 3px;
+    letter-spacing: 0;
+  }
+  .dd-sheet-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 5% calc(24px + env(safe-area-inset-bottom, 0px));
+    background: var(--ink);
+    color: var(--cream);
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+  }
+  .dd-sheet-cta svg {
+    color: var(--yellow);
+  }
 }
 .button {
   display: inline-flex;
@@ -301,20 +613,19 @@ em {
   padding: 13px 0;
   letter-spacing: 0.04em;
   position: relative;
-  -webkit-mask-image: linear-gradient(
+  /* -webkit-mask-image: linear-gradient(
     to right,
     transparent 0,
     #000 40px,
     #000 calc(100% - 40px),
     transparent 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0,
-    #000 40px,
-    #000 calc(100% - 40px),
-    transparent 100%
-  );
+  ); */
+ .marquee {
+  overflow: hidden;
+  mask-image: none;
+  -webkit-mask-image: none;
+  filter: none;
+}
 }
 .marquee__track {
   display: inline-flex;
@@ -1552,3 +1863,4 @@ em {
     animation-iteration-count: infinite !important;
   }
 }
+
