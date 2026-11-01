@@ -29,7 +29,7 @@ export function EventCard({
     >
       <div className={`event-art art-${event.art}`}>
         <span className="art-circle" />
-        <span className="art-sun">✳</span>
+        {/* <span className="art-sun">✳</span> */}
         <span className="art-wave">〰</span>
         <span className="art-word">{event.category.toUpperCase()}</span>
         <span className="demo-ribbon">DEMO EVENT</span>

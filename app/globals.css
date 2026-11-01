@@ -121,10 +121,7 @@ em {
   border: 0;
 } */
 
-/* ─────────────────────────────────────────────
-   HEADER (dd-)
-   Uses the site's own tokens: --ink --cream --pink --teal --yellow --blue --orange
-   ───────────────────────────────────────────── */
+/*  HEADER */
 .dd-sr {
   position: absolute;
   width: 1px;
@@ -305,9 +302,7 @@ em {
   border-color: var(--yellow);
 }
 
-/* ─────────────────────────────────────────────
-   MOBILE MENU: colour blocks that slide in
-   ───────────────────────────────────────────── */
+/* MOBILE MENU: colour blocks that slide in */
 .dd-sheet {
   display: none;
 }

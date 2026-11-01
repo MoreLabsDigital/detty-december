@@ -66,7 +66,7 @@ export function Leaderboard({
       id={compact ? undefined : "arcade-leaderboard"}
     >
       <div className="arcade-rank-head">
-        <span>✳ THE HALL OF FAME · THIS DEVICE</span>
+        <span> THE HALL OF FAME · THIS DEVICE</span>
         <h2>
           ARCADE <em>LEADERBOARD.</em>
         </h2>
@@ -117,7 +117,7 @@ export function Leaderboard({
       </ol>
       {onPlayAgain && (
         <button className="arcade-primary" onClick={onPlayAgain}>
-          PLAY AGAIN ↗
+          PLAY AGAIN 
         </button>
       )}
     </section>

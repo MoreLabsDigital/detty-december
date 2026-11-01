@@ -226,7 +226,7 @@ export function SnakeGame() {
     <div className="arcade-layout">
       <div className="arcade-machine">
         <div className="arcade-machine-top">
-          <span>✳ SNAKE XENZIA / LAGOS EDITION</span>
+          <span>SNAKE XENZIA / LAGOS EDITION</span>
           <button onClick={() => setSound((v) => !v)} aria-pressed={sound}>
             {sound ? "♪ SOUND ON" : "♪ SOUND OFF"}
           </button>

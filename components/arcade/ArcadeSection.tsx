@@ -18,7 +18,7 @@ export function ArcadeSection() {
           the December Silk global leaderboard.
         </p>
         <Link href="/play" className="arcade-primary">
-          PLAY NOW ↗
+          PLAY NOW 
         </Link>
       </div>
       <div className="arcade-promo-right">
