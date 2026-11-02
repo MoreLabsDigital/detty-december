@@ -96,6 +96,14 @@ export function mapSupabaseEvent(r: Row): Event {
   };
 }
 export async function getEvents(): Promise<Event[]> {
+  if (!supabase) {
+    console.warn(
+      "Supabase is not configured. Using existing curated events."
+    );
+
+    return EVENTS;
+  }
+
   try {
     const { data, error } = await supabase
       .from("events")
