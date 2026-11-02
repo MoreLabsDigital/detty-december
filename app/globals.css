@@ -63,63 +63,7 @@ em {
   font-style: normal;
   color: var(--pink);
 }
-/* .site-header {
-  height: 76px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 4.5%;
-  background: var(--ink);
-  color: white;
-  gap: 26px;
-  position: relative;
-  z-index: 50;
-  border-bottom: 1px solid #444;
-}
-.brand {
-  font-weight: 800;
-  letter-spacing: -0.08em;
-  font-size: 25px;
-  white-space: nowrap;
-}
-.brand span {
-  color: var(--yellow);
-  padding: 0 4px;
-}
-.nav {
-  display: flex;
-  gap: 34px;
-  align-items: center;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.09em;
-}
-.nav a:hover {
-  color: var(--yellow);
-}
-.nav b {
-  background: var(--yellow);
-  color: var(--ink);
-  padding: 3px 7px;
-  border-radius: 20px;
-}
-.header-cta {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: var(--yellow);
-  color: var(--ink);
-  font-size: 11px;
-  font-weight: 900;
-  padding: 13px 18px;
-  white-space: nowrap;
-}
-.mobile-menu {
-  display: none;
-  background: transparent;
-  color: white;
-  border: 0;
-} */
+
 
 /*  HEADER */
 .dd-sr {
@@ -171,6 +115,30 @@ em {
 }
 .dd-header[data-scrolled="true"] .dd-bar {
   background: rgba(16, 16, 16, 0.64);
+}
+/* December Silk navbar logo */
+
+.dd-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.dd-brand-logo {
+  display: block;
+  width: auto;
+  height: 56px;
+  max-width: 180px;
+  object-fit: contain;
+}
+
+@media (max-width: 640px) {
+  .dd-brand-logo {
+    height: 42px;
+    max-width: 130px;
+  }
 }
 .dd-bar::after {
   /* the site's palette as a strip, inset so it follows the rounded corners */

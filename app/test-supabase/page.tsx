@@ -4,6 +4,19 @@ import { supabase } from "@/lib/supabase";
 export const dynamic = "force-dynamic";
 
 export default async function TestSupabase() {
+  // Handle missing Supabase configuration
+  if (!supabase) {
+    return (
+      <main style={{ padding: "40px" }}>
+        <h1>December Silk — Supabase Test</h1>
+        <p style={{ color: "red" }}>
+          Supabase is not configured. Check your environment variables.
+        </p>
+      </main>
+    );
+  }
+
+  // Fetch published events
   const { data, error } = await supabase
     .from("events")
     .select(`
