@@ -1,73 +1,158 @@
+
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { EVENTS, eventBySlug, money, time } from "@/lib/events";
+
+import { money, time } from "@/lib/events";
+import { getEventBySlug } from "@/lib/supabase-events";
 import { EventActions } from "@/components/EventActions";
-type Props = { params: Promise<{ slug: string }> };
-export async function generateStaticParams() {
-  return EVENTS.map((e) => ({ slug: e.slug }));
+
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export const dynamic = "force-dynamic";
+
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const event = await getEventBySlug(slug);
+
+  return {
+    title: event?.title || "Event not found",
+    description: event?.description,
+  };
 }
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const e = eventBySlug((await params).slug);
-  return { title: e?.title || "Event not found", description: e?.description };
-}
-export default async function EventPage({ params }: Props) {
-  const e = eventBySlug((await params).slug);
-  if (!e) notFound();
+
+export default async function EventPage({
+  params,
+}: Props) {
+  const { slug } = await params;
+
+  const event = await getEventBySlug(slug);
+
+  if (!event) {
+    notFound();
+  }
+
+  const formattedDate = new Date(
+    event.start
+  ).toLocaleDateString("en-NG", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "Africa/Lagos",
+  });
+
   return (
     <main className="interior detail-page">
       <div className="detail-intro">
-        <Link href="/explore">← BACK TO EVENTS</Link>
-        <span>DEMONSTRATION EVENT / NOT VERIFIED</span>
+        <Link href="/explore">
+          ← BACK TO EVENTS
+        </Link>
+
+        <span>EVENT DETAILS</span>
       </div>
+
       <div className="detail-grid">
         <div>
-          <div className={`detail-art event-art art-${e.art}`}>
-            <span className="art-circle" />
-            {/* <span className="art-sun">✳</span> */}
+          <div
+            className={`detail-art event-art art-${event.art}`}
+          >
+            {event.imageUrl ? (
+              <img
+                src={event.imageUrl}
+                alt={`${event.title} event flyer`}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  zIndex: 2,
+                }}
+              />
+            ) : (
+              <span className="art-circle" />
+            )}
+
             <span className="art-wave">〰</span>
-            <span className="art-word">{e.category.toUpperCase()}</span>
-            <span className="demo-ribbon">DEMO EVENT</span>
+
+            <span className="art-word">
+              {event.category.toUpperCase()}
+            </span>
           </div>
         </div>
+
         <div className="detail-info">
           <div className="section-kicker">
-            {e.category.toUpperCase()} / DECEMBER 2026
+            {event.category.toUpperCase()} /{" "}
+            {new Date(event.start)
+              .toLocaleDateString("en-NG", {
+                month: "long",
+                year: "numeric",
+                timeZone: "Africa/Lagos",
+              })
+              .toUpperCase()}
           </div>
-          <h1>{e.title}</h1>
-          <p className="detail-description">{e.description}</p>
+
+          <h1>{event.title}</h1>
+
+          <p className="detail-description">
+            {event.description}
+          </p>
+
           <div className="detail-facts">
             <div>
               <span>WHEN</span>
+
               <strong>
-                DECEMBER {Number(e.start.slice(8, 10))}, 2026 · {time(e.start)}{" "}
-                – {time(e.end)} WAT
+                {formattedDate} · {time(event.start)}
+                {" – "}
+                {time(event.end)} WAT
               </strong>
             </div>
+
             <div>
               <span>WHERE</span>
+
               <strong>
-                {e.venue}, {e.neighbourhood}, {e.city}
+                {event.venue}, {event.neighbourhood},{" "}
+                {event.city}
               </strong>
             </div>
+
             <div>
               <span>PRICE</span>
-              <strong>{money(e.price)}</strong>
+              <strong>{money(event.price)}</strong>
             </div>
+
             <div>
               <span>ORGANISER</span>
-              <strong>{e.organiser} (demo)</strong>
+              <strong>{event.organiser}</strong>
             </div>
+
             <div>
               <span>TICKETS</span>
-              <strong>NOT AVAILABLE — DEMONSTRATION ONLY</strong>
+
+              <strong>
+                {event.ticketUrl ? (
+                  <a
+                    href={event.ticketUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    GET TICKETS ↗
+                  </a>
+                ) : (
+                  "TICKET LINK NOT AVAILABLE"
+                )}
+              </strong>
             </div>
           </div>
-          <EventActions event={e} />
-          <p className="fine-print">
-            This is a fictional sample. Do not travel to this venue or purchase
-            tickets based on this listing.
-          </p>
+
+          <EventActions event={event} />
         </div>
       </div>
     </main>
