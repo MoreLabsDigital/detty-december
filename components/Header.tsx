@@ -42,13 +42,21 @@ export function Header() {
 
   const navRef = useRef<HTMLElement>(null);
 
-  // Hide mobile header when scrolling down.
-  // Show it again when scrolling up.
+  // Hide the header when scrolling down or pausing; reveal it while scrolling up.
   useEffect(() => {
     let last = window.scrollY;
     let ticking = false;
+    let stopTimer: number | undefined;
 
     const onScroll = () => {
+      if (stopTimer !== undefined) {
+        window.clearTimeout(stopTimer);
+      }
+
+      stopTimer = window.setTimeout(() => {
+        setHidden(window.scrollY > 1);
+      }, 400);
+
       if (ticking) return;
 
       ticking = true;
@@ -58,7 +66,10 @@ export function Header() {
 
         setScrolled(y > 24);
 
-        if (Math.abs(y - last) > 6) {
+        if (y <= 1) {
+          setHidden(false);
+          last = y;
+        } else if (Math.abs(y - last) > 6) {
           setHidden(y > last && y > 160);
           last = y;
         }
@@ -73,8 +84,12 @@ export function Header() {
       passive: true,
     });
 
-    return () =>
+    return () => {
       window.removeEventListener("scroll", onScroll);
+      if (stopTimer !== undefined) {
+        window.clearTimeout(stopTimer);
+      }
+    };
   }, []);
 
   // Close mobile menu when navigating.

@@ -7,6 +7,9 @@ export const metadata: Metadata = {
     default: "Detty December — December Is a Whole Adventure",
     template: "%s | Detty December",
   },
+  icons: {
+    icon: "/images/logo.png",
+  },
   description:
     "31 days. Endless plans. Find your kind of Detty. An interactive demonstration of December event discovery in Lagos.",
 };

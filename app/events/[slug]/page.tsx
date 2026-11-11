@@ -69,24 +69,13 @@ export default async function EventPage({
       <div className="detail-grid">
 
         {/* EVENT IMAGE */}
-        <div
-          style={{
-            width: "100%",
-            minWidth: 0,
-          }}
-        >
+        <div className="detail-media">
           {event.imageUrl ? (
             <img
               src={event.imageUrl}
               alt={`${event.title} event flyer`}
               loading="eager"
-              style={{
-                display: "block",
-                width: "150%",
-                maxWidth: "500px",
-                height: "500px",
-                objectFit: "contain",
-              }}
+              className="detail-flyer"
             />
           ) : (
             <div

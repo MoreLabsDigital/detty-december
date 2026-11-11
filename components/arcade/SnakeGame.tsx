@@ -312,7 +312,7 @@ export function SnakeGame() {
           </button>
           <button onClick={start}>↻ RESTART</button>
         </div>
-        <div className="arcade-dpad" aria-label="Touch direction controls">
+        {/* <div className="arcade-dpad" aria-label="Touch direction controls">
           <button
             className="up"
             onClick={() => direction("up")}
@@ -341,9 +341,9 @@ export function SnakeGame() {
           >
             →
           </button>
-        </div>
+        </div> */}
         <p className="arcade-tip">
-          SWIPE OR USE ARROWS / WASD • SPACE TO PAUSE • EAT ✦ TO GROW
+          SWIPE
         </p>
       </div>
       <Leaderboard

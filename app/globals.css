@@ -85,6 +85,20 @@ em {
   padding-inline: 4.5%;
   color: var(--cream);
   pointer-events: none;
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.7, 0.1, 1),
+    opacity 0.3s ease,
+    visibility 0s;
+}
+.dd-header[data-hidden="true"] {
+  transform: translateY(calc(-100% - 24px));
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.7, 0.1, 1),
+    opacity 0.3s ease,
+    visibility 0s 0.3s;
 }
 .dd-header :focus-visible {
   outline: 3px solid var(--yellow);
@@ -438,7 +452,7 @@ em {
   padding: 12px;
 }
 .hero {
-  background: var(--ink);
+  background: #000;
   color: var(--cream);
   min-height: 720px;
   position: relative;
@@ -449,7 +463,6 @@ em {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at 70% 30%, #282822, transparent 50%);
 }
 .hero-content {
   position: relative;
@@ -477,7 +490,7 @@ em {
   color: var(--yellow);
 }
 .hero-headline {
-  font-size: clamp(65px, 10vw, 164px);
+  font-size: clamp(54px, 8.5vw, 128px);
   font-weight: 700;
   line-height: 0.86;
   margin: 0;
@@ -1155,7 +1168,7 @@ em {
   font-size: 80px;
 }
 .footer h2 {
-  font-size: clamp(49px, 9vw, 135px);
+  font-size: clamp(42px, 7vw, 100px);
   line-height: 0.89;
   margin: 5px 0 30px;
 }
@@ -1452,7 +1465,7 @@ em {
   text-decoration: underline;
 }
 .detail-page {
-  padding: 40px 5% 100px;
+  padding: 110px 5% 100px;
 }
 .detail-intro {
   display: flex;
@@ -1469,8 +1482,22 @@ em {
   gap: 6%;
   padding-top: 45px;
 }
+.detail-media {
+  width: 100%;
+  max-width: 500px;
+  min-width: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--ink);
+}
+.detail-flyer {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 .detail-art {
-  height: 650px;
+  height: 100%;
   border: 3px solid var(--ink);
 }
 .detail-art .art-sun {
@@ -1480,7 +1507,7 @@ em {
   font-size: 60px;
 }
 .detail-info h1 {
-  font-size: clamp(56px, 6.2vw, 100px);
+  font-size: clamp(44px, 4.5vw, 72px);
   line-height: 0.94;
   margin: 34px 0;
 }
@@ -1528,7 +1555,7 @@ em {
     right: -10%;
   }
   .hero-headline {
-    font-size: 10.5vw;
+    font-size: 9vw;
   }
   .feature-grid,
   .listing-grid {
@@ -1545,6 +1572,9 @@ em {
   }
 }
 @media (max-width: 700px) {
+  .detail-page {
+    padding-top: 100px;
+  }
   .site-header {
     height: 64px;
     padding: 0 5%;
@@ -1586,7 +1616,7 @@ em {
     margin-top: 68px;
   }
   .hero-headline {
-    font-size: clamp(56px, 13vw, 93px);
+    font-size: clamp(46px, 11vw, 78px);
   }
   .hero-sub {
     font-size: 15px;
@@ -1730,7 +1760,7 @@ em {
     display: none;
   }
   .footer h2 {
-    font-size: clamp(47px, 11vw, 83px);
+    font-size: clamp(38px, 9vw, 64px);
   }
   .footer-bottom {
     flex-direction: column;
@@ -1781,9 +1811,6 @@ em {
     grid-template-columns: 1fr;
     gap: 35px;
   }
-  .detail-art {
-    height: 350px;
-  }
   .detail-art .art-sun {
     font-size: 180px;
   }
@@ -1791,7 +1818,7 @@ em {
     font-size: 38px;
   }
   .detail-info h1 {
-    font-size: 60px;
+    font-size: clamp(38px, 9vw, 48px);
   }
   .detail-facts > div {
     grid-template-columns: 95px 1fr;

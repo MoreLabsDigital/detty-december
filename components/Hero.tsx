@@ -33,7 +33,7 @@ export function Hero() {
         <div className="hero-overline">
           LAGOS, NIGERIA THE DECEMBER EDITION 2026
         </div>
-        <p className="hero-eyebrow">YOUR DECEMBER, YOUR RULES.</p>
+        {/* <p className="hero-eyebrow">YOUR DECEMBER, YOUR RULES.</p> */}
         <h1 className="hero-headline">
           <span className="line">DECEMBER</span>
           <span className="line second">IS A WHOLE</span>
