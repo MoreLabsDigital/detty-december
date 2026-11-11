@@ -1604,8 +1604,8 @@ em {
     display: flex;
   }
   .hero {
-    padding: 38px 5% 30px;
-    min-height: 660px;
+    padding: 100px 5% 42px;
+    min-height: auto;
   }
   .hero-overline {
     font-size: 9px;
@@ -1624,20 +1624,30 @@ em {
     z-index: 2;
   }
   .hero-art {
-    top: 155px;
-    right: -42%;
-    width: 100%;
-    opacity: 0.45;
+    top: 300px;
+    right: -32%;
+    width: 76%;
+    opacity: 0.2;
   }
   .hero-actions {
     align-items: flex-start;
     flex-direction: column;
-    gap: 24px;
+    gap: 22px;
+  }
+  .hero-actions .button {
+    width: min(100%, 340px);
+    justify-content: space-between;
   }
   .hero-bottom {
-    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    margin-top: 52px;
     font-size: 9px;
-    gap: 15px;
+    gap: 16px;
+  }
+  .hero-bottom span:last-child {
+    text-align: right;
   }
   .marquee {
     font-size: 18px;
