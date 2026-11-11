@@ -223,7 +223,7 @@ export default function PlansPage() {
                               <Link
                                 href={`/events/${event.slug}`}
                               >
-                                {event.title} ↗
+                                {event.title} 
                               </Link>
                             </h3>
 

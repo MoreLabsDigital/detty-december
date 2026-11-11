@@ -175,7 +175,7 @@ export default async function EventPage({
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    GET TICKETS ↗
+                    GET TICKETS 
                   </a>
                 ) : (
                   "TICKET LINK NOT AVAILABLE"
