@@ -36,7 +36,14 @@ export function Filters({
             onChange={(e) => set("category", e.target.value)}
           >
             <option value="">All vibes</option>
-            {["Music", "Nightlife", "Arts", "Food", "Experiences"].map((x) => (
+            {[
+              "Music",
+              "Nightlife",
+              "Arts",
+              "Food",
+              "Experiences",
+              "Fashion Pop-ups",
+            ].map((x) => (
               <option key={x}>{x}</option>
             ))}
           </select>

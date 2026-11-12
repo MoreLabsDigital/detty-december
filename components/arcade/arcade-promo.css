@@ -111,6 +111,141 @@
 .arcade-promo .arcade-rank-head p {
   display: none;
 }
+.arcade-promo .arcade-leaderboard.compact {
+  min-height: 330px;
+  padding: clamp(16px, 2.2vw, 24px);
+  background: #fff8ed;
+  border: 3px solid #101010;
+  box-shadow: 6px 6px 0 #101010;
+}
+.arcade-promo .arcade-rank-head > span {
+  display: block;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+.arcade-promo .arcade-rank-head h2 {
+  margin: 8px 0 16px;
+  font-size: clamp(22px, 2.4vw, 28px);
+  line-height: 1.05;
+}
+.arcade-promo .arcade-leaderboard.compact .arcade-ranking,
+.arcade-promo .arcade-leaderboard.compact .arcade-loading-skeleton {
+  display: grid;
+  grid-template-rows: repeat(3, minmax(68px, auto));
+  min-height: 204px;
+  margin: 0;
+  padding: 0;
+  border: 2px solid #101010;
+  overflow: hidden;
+}
+.arcade-promo .arcade-leaderboard.compact .arcade-ranking {
+  list-style: none;
+  gap: 0;
+  max-height: none;
+}
+.arcade-promo .arcade-leaderboard.compact .arcade-ranking li,
+.arcade-promo .arcade-skeleton-row {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  min-height: 68px;
+  padding: 10px 12px;
+  border: 0;
+  border-bottom: 1px solid #10101024;
+}
+.arcade-promo .arcade-leaderboard.compact .arcade-ranking li:last-child,
+.arcade-promo .arcade-skeleton-row:last-child {
+  border-bottom: 0;
+}
+.arcade-promo .arcade-leaderboard.compact .arcade-ranking li.top-1,
+.arcade-promo .arcade-skeleton-row:nth-child(1) {
+  background: #ffd84d;
+}
+.arcade-promo .arcade-leaderboard.compact .arcade-ranking li.top-2,
+.arcade-promo .arcade-skeleton-row:nth-child(2) {
+  background: #f6bfe0;
+}
+.arcade-promo .arcade-leaderboard.compact .arcade-ranking li.top-3,
+.arcade-promo .arcade-skeleton-row:nth-child(3) {
+  background: #b9e3d9;
+}
+.arcade-promo .arcade-leaderboard.compact .arcade-rank-num,
+.arcade-promo .arcade-skeleton-rank {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border: 2px solid #101010;
+  border-radius: 50%;
+  background: #fff8ed;
+  font-size: 14px;
+  font-weight: 950;
+}
+.arcade-promo .arcade-leaderboard.compact .top-1 .arcade-rank-num {
+  background: #101010;
+  color: #ffd84d;
+}
+.arcade-promo .arcade-leaderboard.compact .arcade-rank-person strong {
+  display: block;
+  font-size: 14px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.arcade-promo .arcade-leaderboard.compact .arcade-rank-person small {
+  display: block;
+  margin-top: 3px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+.arcade-promo .arcade-leaderboard.compact .arcade-ranking li > b {
+  padding: 8px 10px;
+  border: 2px solid #101010;
+  background: #101010;
+  color: #fff0db;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.arcade-promo .arcade-leaderboard.compact .arcade-empty {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  display: grid;
+  place-content: center;
+  min-height: 204px;
+  padding: 16px;
+  font-size: 13px;
+  font-weight: 800;
+  text-align: center;
+}
+.arcade-promo .arcade-skeleton-player {
+  display: grid;
+  gap: 7px;
+}
+.arcade-promo .arcade-skeleton-player i,
+.arcade-promo .arcade-skeleton-score {
+  display: block;
+  height: 10px;
+  border: 1px solid #10101030;
+  background: #fff8ed80;
+}
+.arcade-promo .arcade-skeleton-player i:first-child {
+  width: 72%;
+}
+.arcade-promo .arcade-skeleton-player i:last-child {
+  width: 48%;
+  height: 7px;
+}
+.arcade-promo .arcade-skeleton-score {
+  width: 58px;
+  height: 28px;
+  border: 2px solid #101010;
+  background: #10101015;
+}
 @media (max-width: 800px) {
   .arcade-promo {
     grid-template-columns: 1fr;
@@ -118,5 +253,30 @@
   }
   .arcade-preview {
     transform: none;
+  }
+}
+@media (max-width: 480px) {
+  .arcade-promo .arcade-leaderboard.compact {
+    padding: 14px;
+  }
+  .arcade-promo .arcade-leaderboard.compact .arcade-ranking li,
+  .arcade-promo .arcade-skeleton-row {
+    grid-template-columns: 38px minmax(0, 1fr) auto;
+    gap: 8px;
+    padding: 9px 8px;
+  }
+  .arcade-promo .arcade-leaderboard.compact .arcade-rank-num,
+  .arcade-promo .arcade-skeleton-rank {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    font-size: 12px;
+  }
+  .arcade-promo .arcade-leaderboard.compact .arcade-rank-person strong {
+    font-size: 12px;
+  }
+  .arcade-promo .arcade-leaderboard.compact .arcade-ranking li > b {
+    padding: 6px;
+    font-size: 9px;
   }
 }

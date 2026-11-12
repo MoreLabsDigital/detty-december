@@ -12,6 +12,7 @@ import {
   useRef,
   useState,
   type CSSProperties,
+  type FocusEvent,
 } from "react";
 
 const LINKS = [
@@ -41,48 +42,37 @@ export function Header() {
   const [lit, setLit] = useState<string | null>(null);
 
   const navRef = useRef<HTMLElement>(null);
+  const scrollingRef = useRef(false);
+  const pointerInsideRef = useRef(false);
+  const focusWithinRef = useRef(false);
+  const openRef = useRef(open);
+  openRef.current = open;
 
-  // Hide the header when scrolling down or pausing; reveal it while scrolling up.
   useEffect(() => {
-    let last = window.scrollY;
-    let ticking = false;
     let stopTimer: number | undefined;
 
     const onScroll = () => {
+      scrollingRef.current = true;
+      setScrolled(window.scrollY > 24);
+      setHidden(
+        window.scrollY > 1 &&
+          !pointerInsideRef.current &&
+          !focusWithinRef.current &&
+          !openRef.current
+      );
+
       if (stopTimer !== undefined) {
         window.clearTimeout(stopTimer);
       }
 
       stopTimer = window.setTimeout(() => {
-        setHidden(window.scrollY > 1);
-      }, 400);
-
-      if (ticking) return;
-
-      ticking = true;
-
-      requestAnimationFrame(() => {
-        const y = window.scrollY;
-
-        setScrolled(y > 24);
-
-        if (y <= 1) {
-          setHidden(false);
-          last = y;
-        } else if (Math.abs(y - last) > 6) {
-          setHidden(y > last && y > 160);
-          last = y;
-        }
-
-        ticking = false;
-      });
+        scrollingRef.current = false;
+        setHidden(false);
+      }, 160);
     };
 
-    onScroll();
-
-    window.addEventListener("scroll", onScroll, {
-      passive: true,
-    });
+    setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", onScroll);
@@ -91,6 +81,43 @@ export function Header() {
       }
     };
   }, []);
+
+  const handlePointerEnter = () => {
+    pointerInsideRef.current = true;
+    setHidden(false);
+  };
+
+  const handlePointerLeave = () => {
+    pointerInsideRef.current = false;
+    setHidden(
+      scrollingRef.current &&
+        window.scrollY > 1 &&
+        !focusWithinRef.current &&
+        !openRef.current
+    );
+  };
+
+  const handleFocusCapture = () => {
+    focusWithinRef.current = true;
+    setHidden(false);
+  };
+
+  const handleBlurCapture = (event: FocusEvent<HTMLElement>) => {
+    if (
+      event.relatedTarget instanceof Node &&
+      event.currentTarget.contains(event.relatedTarget)
+    ) {
+      return;
+    }
+
+    focusWithinRef.current = false;
+    setHidden(
+      scrollingRef.current &&
+        window.scrollY > 1 &&
+        !pointerInsideRef.current &&
+        !openRef.current
+    );
+  };
 
   // Close mobile menu when navigating.
   useEffect(() => {
@@ -161,6 +188,10 @@ export function Header() {
         className="dd-header"
         data-hidden={hidden && !open}
         data-scrolled={scrolled}
+        onPointerEnter={handlePointerEnter}
+        onPointerLeave={handlePointerLeave}
+        onFocusCapture={handleFocusCapture}
+        onBlurCapture={handleBlurCapture}
       >
         <div className="dd-bar">
 
@@ -375,7 +406,7 @@ export function Footer() {
 
       <div className="footer-bottom">
         <span>
-          © 2026 DECEMBER SILK
+          © 2026 MORELABS
         </span>
 
         <div>
@@ -387,8 +418,8 @@ export function Footer() {
             MY PLANS
           </Link>
 
-          <a href="mailto:hello@example.com">
-            CONTACT (PLACEHOLDER)
+          <a href="mailto:hello@morelabsdigital.com">
+            CONTACT
           </a>
         </div>
       </div>

@@ -171,7 +171,7 @@ export default function PlansPage() {
               className="button dark"
               href="/#board"
             >
-              EXPLORE DECEMBER ↗
+              EXPLORE DECEMBER 
             </Link>
           </div>
         ) : mode === "list" ? (

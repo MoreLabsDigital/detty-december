@@ -86,19 +86,15 @@ em {
   color: var(--cream);
   pointer-events: none;
   transition:
-    transform 0.3s cubic-bezier(0.2, 0.7, 0.1, 1),
-    opacity 0.3s ease,
-    visibility 0s;
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease;
 }
 .dd-header[data-hidden="true"] {
   transform: translateY(calc(-100% - 24px));
   opacity: 0;
-  visibility: hidden;
+}
+.dd-header[data-hidden="true"] .dd-bar {
   pointer-events: none;
-  transition:
-    transform 0.3s cubic-bezier(0.2, 0.7, 0.1, 1),
-    opacity 0.3s ease,
-    visibility 0s 0.3s;
 }
 .dd-header :focus-visible {
   outline: 3px solid var(--yellow);

@@ -46,6 +46,7 @@ function plainUrl(value: string | null): string | null {
 function category(value: string | null): Event["category"] {
   const s = (value || "").toLowerCase();
 
+  if (/fashion|pop[\s-]?up/.test(s)) return "Fashion Pop-ups";
   if (/concert|music|live/.test(s)) return "Music";
   if (/party|night|club|rave/.test(s)) return "Nightlife";
   if (/art|exhibit|gallery/.test(s)) return "Arts";

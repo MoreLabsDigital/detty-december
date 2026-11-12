@@ -119,6 +119,7 @@ export function Leaderboard({
     <section
       className={`arcade-leaderboard ${compact ? "compact" : ""}`}
       id={compact ? undefined : "arcade-leaderboard"}
+      aria-busy={loading}
     >
       <div className="arcade-rank-head">
         <span>THE HALL OF FAME · GLOBAL RANKINGS</span>
@@ -181,9 +182,32 @@ export function Leaderboard({
       )}
 
       {loading ? (
-        <p className="arcade-empty">
-          Loading global rankings...
-        </p>
+        compact ? (
+          <div
+            className="arcade-loading-skeleton"
+            role="status"
+            aria-label="Loading global rankings"
+          >
+            {[1, 2, 3].map((rank) => (
+              <div
+                className="arcade-skeleton-row"
+                key={rank}
+                aria-hidden="true"
+              >
+                <span className="arcade-skeleton-rank" />
+                <span className="arcade-skeleton-player">
+                  <i />
+                  <i />
+                </span>
+                <span className="arcade-skeleton-score" />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="arcade-empty" role="status">
+            Loading global rankings...
+          </p>
+        )
       ) : (
         <ol className="arcade-ranking">
           {entries
