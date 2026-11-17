@@ -19,6 +19,7 @@ import {
   ArrowRight,
   X,
   CalendarDays,
+  MapPin,
 } from "lucide-react";
 
 import { dayOf } from "@/lib/events";
@@ -47,6 +48,8 @@ const route = coords
   )
   .join(" ");
 
+type LocationFilter = "all" | "Lagos" | "Abuja";
+
 export function Board() {
   const { events: allEvents, loading } = useEvents();
 
@@ -55,6 +58,8 @@ export function Board() {
   >(null);
 
   const [listing, setListing] = useState(false);
+  const [location, setLocation] =
+    useState<LocationFilter>("all");
 
   const wrap = useRef<HTMLDivElement>(null);
 
@@ -68,29 +73,41 @@ export function Board() {
     [allEvents]
   );
 
+  const locationEvents = useMemo(
+    () =>
+      location === "all"
+        ? decemberEvents
+        : decemberEvents.filter(
+            (event) =>
+              event.city.trim().toLowerCase() ===
+              location.toLowerCase()
+          ),
+    [decemberEvents, location]
+  );
+
   const countsByDay = useMemo(() => {
     const map = new Map<number, number>();
 
-    for (const event of decemberEvents) {
+    for (const event of locationEvents) {
       const day = dayOf(event);
 
       map.set(day, (map.get(day) ?? 0) + 1);
     }
 
     return map;
-  }, [decemberEvents]);
+  }, [locationEvents]);
 
   const featuredByDay = useMemo(() => {
     const set = new Set<number>();
 
-    for (const event of decemberEvents) {
+    for (const event of locationEvents) {
       if (event.featured) {
         set.add(dayOf(event));
       }
     }
 
     return set;
-  }, [decemberEvents]);
+  }, [locationEvents]);
 
   useEffect(() => {
     if (listing) return;
@@ -146,7 +163,7 @@ export function Board() {
 
   const events =
     selected !== null
-      ? decemberEvents.filter(
+      ? locationEvents.filter(
           (event) => dayOf(event) === selected
         )
       : [];
@@ -198,15 +215,38 @@ export function Board() {
           <i className="legend-star">★</i> FEATURED
         </span>
 
-        <button
-          onClick={() => setListing((value) => !value)}
-        >
-          <CalendarDays size={17} />
+        <div className="board-control-actions">
+          <label className="board-location-filter">
+            <MapPin size={16} aria-hidden="true" />
+            <span>LOCATION</span>
+            <select
+              aria-label="Filter events by location"
+              value={location}
+              onChange={(event) => {
+                const value = event.target.value;
+                setLocation(
+                  value === "Lagos" || value === "Abuja"
+                    ? value
+                    : "all"
+                );
+              }}
+            >
+              <option value="all">ALL CITIES</option>
+              <option value="Lagos">LAGOS</option>
+              <option value="Abuja">ABUJA</option>
+            </select>
+          </label>
 
-          {listing
-            ? "SHOW THE BOARD"
-            : "LIST VIEW"}
-        </button>
+          <button
+            onClick={() => setListing((value) => !value)}
+          >
+            <CalendarDays size={17} />
+
+            {listing
+              ? "SHOW THE BOARD"
+              : "LIST VIEW"}
+          </button>
+        </div>
       </div>
 
       {listing ? (
@@ -489,9 +529,9 @@ export function Board() {
                     </h3>
 
                     <p>
-                      No events on this date.
-                      Try another square or
-                      explore the whole month.
+                    {location === "all"
+                      ? "No events on this date. Try another square or explore the whole month."
+                      : `No ${location} events on this date. Try another square or choose a different location.`}
                     </p>
 
                     <button
