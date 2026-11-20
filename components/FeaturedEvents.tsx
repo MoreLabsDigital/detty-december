@@ -7,25 +7,23 @@ import { EventCard } from "@/components/EventCard";
 export function FeaturedEvents() {
   const { events, loading } = useEvents();
 
+  // Only show events selected in the admin
+  // and already published.
   const featured = events
-    .filter((event) => event.featured)
+    .filter((event) => event.featured === true)
     .slice(0, 3);
 
-  const display = featured.length
-    ? featured
-    : events.slice(0, 3);
-
   if (loading) {
-    return <p>Loading events…</p>;
+    return <p>Loading featured events…</p>;
   }
 
-  if (!display.length) {
-    return <p>No published events yet.</p>;
+  if (!featured.length) {
+    return <p>No featured events yet.</p>;
   }
 
   return (
     <>
-      {display.map((event) => (
+      {featured.map((event) => (
         <EventCard
           key={event.id}
           event={event}

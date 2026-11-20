@@ -78,19 +78,21 @@ export function EventCard({
         </span>
 
         {event.imageUrl && (
-          <img
-            src={event.imageUrl}
-            alt={`${event.title} flyer`}
-            loading="lazy"
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              zIndex: 2,
-            }}
-          />
+          <>
+            <img
+              src={event.imageUrl}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              className="event-card-image-backdrop"
+            />
+            <img
+              src={event.imageUrl}
+              alt={`${event.title} flyer`}
+              loading="lazy"
+              className="event-card-image"
+            />
+          </>
         )}
 
         {soldOut && (

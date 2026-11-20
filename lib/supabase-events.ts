@@ -21,6 +21,7 @@ type Row = {
   organizer: string | null;
   source: string;
   is_sold_out: boolean;
+  is_featured: boolean;
   created_at: string;
   updated_at: string;
 };
@@ -177,7 +178,7 @@ export function mapSupabaseEvent(
       : "unknown",
 
     verificationStatus: "listed",
-    featured: false,
+    featured: r.is_featured ?? false,
     createdAt: r.created_at,
     updatedAt: r.updated_at,
     art: 0,
@@ -201,8 +202,8 @@ export async function getEvents(): Promise<
     const { data, error } = await supabase
       .from("events")
       .select(
-        "id,title,slug,description,category,venue,address,city,event_date,start_time,end_time,price_min,currency,image_url,ticket_url,organizer,source,is_sold_out,created_at,updated_at"
-      )
+  "id,title,slug,description,category,venue,address,city,event_date,start_time,end_time,price_min,currency,image_url,ticket_url,organizer,source,is_sold_out,is_featured,created_at,updated_at"
+)
       .eq("is_published", true)
       .order("event_date", {
         ascending: true,
