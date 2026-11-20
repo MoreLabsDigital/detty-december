@@ -731,13 +731,14 @@ em {
   font-size: 10px;
   font-weight: 900;
 }
-.board-location-filter select {
-  max-width: 105px;
-  border: 0;
-  background: transparent;
+.board-location-filter button {
+  min-height: 28px;
+  padding: 6px 9px;
   font-size: 10px;
-  font-weight: 900;
-  cursor: pointer;
+}
+.board-location-filter button[aria-pressed="true"] {
+  color: var(--cream);
+  background: var(--ink);
 }
 .board-container {
   margin-top: 40px;
@@ -928,10 +929,15 @@ em {
 }
 .panel-scroll {
   overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   padding: 22px;
   display: grid;
   align-content: start;
   gap: 18px;
+}
+.panel-scroll::-webkit-scrollbar {
+  display: none;
 }
 .event-card {
   border: 2px solid var(--ink);
@@ -1081,6 +1087,34 @@ em {
 .add-button {
   background: var(--ink);
   color: white;
+}
+.buy-ticket-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 12px 16px;
+  border: 2px solid var(--ink);
+  background: var(--pink);
+  box-shadow: 3px 3px 0 var(--ink);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+.buy-ticket-link:hover,
+.buy-ticket-link:focus-visible {
+  background: var(--yellow);
+  box-shadow: 5px 5px 0 var(--ink);
+  transform: translate(-2px, -2px);
+}
+.buy-ticket-link:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
 }
 .event-card.compact .event-art {
   height: 150px;
@@ -1502,12 +1536,32 @@ em {
   padding-top: 45px;
 }
 .detail-media {
+  position: relative;
   width: 100%;
   max-width: 500px;
   min-width: 0;
   aspect-ratio: 4 / 5;
   overflow: hidden;
   background: var(--ink);
+}
+.detail-sold-out-stamp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: auto;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.event-card-sold-out-stamp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 5;
+  width: 100%;
+  height: auto;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 .detail-flyer {
   display: block;

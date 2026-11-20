@@ -20,22 +20,30 @@ type Row = {
   ticket_url: string | null;
   organizer: string | null;
   source: string;
+  is_sold_out: boolean;
   created_at: string;
   updated_at: string;
 };
 
-function plainUrl(value: string | null): string | null {
+function plainUrl(
+  value: string | null
+): string | null {
   if (!value) return null;
 
   const markdown = value.match(
     /^\[https?:\/\/[^\]]+\]\((https?:\/\/[^)]+)\)$/
   );
 
-  const candidate = markdown ? markdown[1] : value;
+  const candidate = markdown
+    ? markdown[1]
+    : value;
 
   try {
     const url = new URL(candidate);
-    return ["https:", "http:"].includes(url.protocol)
+
+    return ["https:", "http:"].includes(
+      url.protocol
+    )
       ? url.toString()
       : null;
   } catch {
@@ -43,14 +51,30 @@ function plainUrl(value: string | null): string | null {
   }
 }
 
-function category(value: string | null): Event["category"] {
+function category(
+  value: string | null
+): Event["category"] {
   const s = (value || "").toLowerCase();
 
-  if (/fashion|pop[\s-]?up/.test(s)) return "Fashion Pop-ups";
-  if (/concert|music|live/.test(s)) return "Music";
-  if (/party|night|club|rave/.test(s)) return "Nightlife";
-  if (/art|exhibit|gallery/.test(s)) return "Arts";
-  if (/food|dining/.test(s)) return "Food";
+  if (/fashion|pop[\s-]?up/.test(s)) {
+    return "Fashion Pop-ups";
+  }
+
+  if (/concert|music|live/.test(s)) {
+    return "Music";
+  }
+
+  if (/party|night|club|rave/.test(s)) {
+    return "Nightlife";
+  }
+
+  if (/art|exhibit|gallery/.test(s)) {
+    return "Arts";
+  }
+
+  if (/food|dining/.test(s)) {
+    return "Food";
+  }
 
   return "Experiences";
 }
@@ -61,24 +85,38 @@ function dateTime(
   fallback: string
 ): string {
   const t = (clock || fallback).slice(0, 8);
-  return `${day}T${t.length === 5 ? t + ":00" : t}+01:00`;
+
+  return `${day}T${
+    t.length === 5 ? t + ":00" : t
+  }+01:00`;
 }
 
-export function mapSupabaseEvent(r: Row): Event {
+export function mapSupabaseEvent(
+  r: Row
+): Event {
   const start = dateTime(
     r.event_date,
     r.start_time,
     "12:00:00"
   );
 
-  const startClock = (r.start_time || "12:00:00").slice(0, 8);
-  const endClock = (r.end_time || "").slice(0, 8);
+  const startClock = (
+    r.start_time || "12:00:00"
+  ).slice(0, 8);
+
+  const endClock = (
+    r.end_time || ""
+  ).slice(0, 8);
 
   let endDay = r.event_date;
 
   if (endClock && endClock < startClock) {
-    const d = new Date(`${r.event_date}T12:00:00Z`);
+    const d = new Date(
+      `${r.event_date}T12:00:00Z`
+    );
+
     d.setUTCDate(d.getUTCDate() + 1);
+
     endDay = d.toISOString().slice(0, 10);
   }
 
@@ -90,34 +128,54 @@ export function mapSupabaseEvent(r: Row): Event {
 
   const neighborhood =
     r.address?.split(",")[0]?.trim() ||
-    r.venue?.split(",").slice(1).join(",").trim() ||
+    r.venue
+      ?.split(",")
+      .slice(1)
+      .join(",")
+      .trim() ||
     r.city;
 
   return {
     id: `supabase:${r.id}`,
     slug: r.slug,
     title: r.title,
-    description: r.description || "Event details coming soon.",
+    description:
+      r.description ||
+      "Event details coming soon.",
     category: category(r.category),
     tags: [
       r.category || "event",
       "lagos",
-      r.source
+      r.source,
     ].map((x) => x.toLowerCase()),
     start,
     end,
     timezone: "Africa/Lagos",
-    venue: r.venue || "Venue to be announced",
+    venue:
+      r.venue || "Venue to be announced",
     address:
       r.address ||
-      [r.venue, r.city].filter(Boolean).join(", "),
+      [r.venue, r.city]
+        .filter(Boolean)
+        .join(", "),
     neighbourhood: neighborhood,
     city: r.city,
     price: r.price_min,
-    currency: (r.currency || "NGN") as Event["currency"],
+    currency: (
+      r.currency || "NGN"
+    ) as Event["currency"],
+
     ticketUrl: plainUrl(r.ticket_url),
-    organiser: r.organizer || "Organiser not specified",
-    bookingStatus: "unknown",
+
+    organiser:
+      r.organizer ||
+      "Organiser not specified",
+
+    // Sold-out status from Supabase
+    bookingStatus: r.is_sold_out
+      ? "sold-out"
+      : "unknown",
+
     verificationStatus: "listed",
     featured: false,
     createdAt: r.created_at,
@@ -128,9 +186,14 @@ export function mapSupabaseEvent(r: Row): Event {
   };
 }
 
-export async function getEvents(): Promise<Event[]> {
+export async function getEvents(): Promise<
+  Event[]
+> {
   if (!supabase) {
-    console.error("Supabase is not configured.");
+    console.error(
+      "Supabase is not configured."
+    );
+
     return [];
   }
 
@@ -138,10 +201,12 @@ export async function getEvents(): Promise<Event[]> {
     const { data, error } = await supabase
       .from("events")
       .select(
-        "id,title,slug,description,category,venue,address,city,event_date,start_time,end_time,price_min,currency,image_url,ticket_url,organizer,source,created_at,updated_at"
+        "id,title,slug,description,category,venue,address,city,event_date,start_time,end_time,price_min,currency,image_url,ticket_url,organizer,source,is_sold_out,created_at,updated_at"
       )
       .eq("is_published", true)
-      .order("event_date", { ascending: true })
+      .order("event_date", {
+        ascending: true,
+      })
       .limit(500);
 
     if (error) {
@@ -149,6 +214,7 @@ export async function getEvents(): Promise<Event[]> {
         "Supabase events query failed:",
         error.message
       );
+
       return [];
     }
 
@@ -156,7 +222,11 @@ export async function getEvents(): Promise<Event[]> {
       mapSupabaseEvent(row as Row)
     );
   } catch (error) {
-    console.error("Event feed unavailable:", error);
+    console.error(
+      "Event feed unavailable:",
+      error
+    );
+
     return [];
   }
 }
@@ -165,5 +235,8 @@ export async function getEventBySlug(
   slug: string
 ): Promise<Event | undefined> {
   const events = await getEvents();
-  return events.find((e) => e.slug === slug);
+
+  return events.find(
+    (event) => event.slug === slug
+  );
 }

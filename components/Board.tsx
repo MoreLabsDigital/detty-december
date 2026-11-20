@@ -48,7 +48,7 @@ const route = coords
   )
   .join(" ");
 
-type LocationFilter = "all" | "Lagos" | "Abuja";
+type LocationFilter = "Lagos" | "Abuja";
 
 export function Board() {
   const { events: allEvents, loading } = useEvents();
@@ -59,7 +59,7 @@ export function Board() {
 
   const [listing, setListing] = useState(false);
   const [location, setLocation] =
-    useState<LocationFilter>("all");
+    useState<LocationFilter>("Lagos");
 
   const wrap = useRef<HTMLDivElement>(null);
 
@@ -75,13 +75,11 @@ export function Board() {
 
   const locationEvents = useMemo(
     () =>
-      location === "all"
-        ? decemberEvents
-        : decemberEvents.filter(
-            (event) =>
-              event.city.trim().toLowerCase() ===
-              location.toLowerCase()
-          ),
+      decemberEvents.filter(
+        (event) =>
+          event.city.trim().toLowerCase() ===
+          location.toLowerCase()
+      ),
     [decemberEvents, location]
   );
 
@@ -216,26 +214,26 @@ export function Board() {
         </span>
 
         <div className="board-control-actions">
-          <label className="board-location-filter">
-            <MapPin size={16} aria-hidden="true" />
-            <span>LOCATION</span>
-            <select
-              aria-label="Filter events by location"
-              value={location}
-              onChange={(event) => {
-                const value = event.target.value;
-                setLocation(
-                  value === "Lagos" || value === "Abuja"
-                    ? value
-                    : "all"
-                );
-              }}
-            >
-              <option value="all">ALL CITIES</option>
-              <option value="Lagos">LAGOS</option>
-              <option value="Abuja">ABUJA</option>
-            </select>
-          </label>
+          <div
+            className="board-location-filter"
+            role="group"
+            aria-label="Filter events by location"
+          >
+            {/* <MapPin size={16} aria-hidden="true" />
+            <span>LOCATION</span> */}
+            {(["Lagos", "Abuja"] as const).map(
+              (city) => (
+                <button
+                  key={city}
+                  type="button"
+                  aria-pressed={location === city}
+                  onClick={() => setLocation(city)}
+                >
+                  {city.toUpperCase()}
+                </button>
+              )
+            )}
+          </div>
 
           <button
             onClick={() => setListing((value) => !value)}
@@ -529,9 +527,7 @@ export function Board() {
                     </h3>
 
                     <p>
-                    {location === "all"
-                      ? "No events on this date. Try another square or explore the whole month."
-                      : `No ${location} events on this date. Try another square or choose a different location.`}
+                      {`No ${location} events on this date. Try another square or choose a different location.`}
                     </p>
 
                     <button
