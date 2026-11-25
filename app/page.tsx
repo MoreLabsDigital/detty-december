@@ -1,4 +1,5 @@
 
+/*
 import Link from "next/link";
 
 import { Hero } from "@/components/Hero";
@@ -105,4 +106,11 @@ export default function Home() {
       </section>
     </main>
   );
+}
+*/
+
+import { ComingSoon } from "@/components/ComingSoon";
+
+export default function Home() {
+  return <ComingSoon />;
 }

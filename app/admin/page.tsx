@@ -1,3 +1,4 @@
+/*
 import Link from "next/link";
 export default function Admin() {
   return;
@@ -12,4 +13,11 @@ export default function Admin() {
       RETURN HOME 
     </Link>
   </main>;
+}
+*/
+
+import { ComingSoon } from "@/components/ComingSoon";
+
+export default function Admin() {
+  return <ComingSoon />;
 }

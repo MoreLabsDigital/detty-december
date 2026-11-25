@@ -1,3 +1,4 @@
+/*
 
 import { supabase } from "@/lib/supabase";
 
@@ -15,7 +16,6 @@ export default async function TestSupabase() {
       </main>
     );
   }
-
   // Fetch published events
   const { data, error } = await supabase
     .from("events")
@@ -63,4 +63,11 @@ export default async function TestSupabase() {
       )}
     </main>
   );
+}
+*/
+
+import { ComingSoon } from "@/components/ComingSoon";
+
+export default function TestSupabase() {
+  return <ComingSoon />;
 }

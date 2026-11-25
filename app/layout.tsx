@@ -20,7 +20,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <PlanProvider>
           <Header />
           {children}
-          <Footer />
+          {/* <Footer /> */}
         </PlanProvider>
       </body>
     </html>
