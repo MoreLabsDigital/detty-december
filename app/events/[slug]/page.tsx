@@ -1,5 +1,4 @@
 
-/*
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -78,7 +77,7 @@ export default async function EventPage({
 
   return (
     <main className="interior detail-page">
-      // BACK NAVIGATION
+      {/* BACK NAVIGATION */}
       <div className="detail-intro">
         <Link href="/explore">
           ← BACK TO EVENTS
@@ -90,7 +89,7 @@ export default async function EventPage({
       </div>
 
       <div className="detail-grid">
-        // EVENT IMAGE
+        {/* EVENT IMAGE */}
         <div className="detail-media">
           {event.imageUrl ? (
             <img
@@ -122,7 +121,7 @@ export default async function EventPage({
           )}
         </div>
 
-        // EVENT DETAILS
+        {/* EVENT DETAILS */}
         <div className="detail-info">
           <div className="section-kicker">
             {event.category.toUpperCase()}
@@ -150,7 +149,7 @@ export default async function EventPage({
           </p>
 
           <div className="detail-facts">
-            // DATE AND TIME
+            {/* DATE AND TIME */}
             <div>
               <span>WHEN</span>
 
@@ -164,7 +163,7 @@ export default async function EventPage({
               </strong>
             </div>
 
-            // LOCATION
+            {/* LOCATION */}
             <div>
               <span>WHERE</span>
 
@@ -181,7 +180,7 @@ export default async function EventPage({
               </strong>
             </div>
 
-            // PRICE
+            {/* PRICE */}
             <div>
               <span>PRICE</span>
 
@@ -190,7 +189,7 @@ export default async function EventPage({
               </strong>
             </div>
 
-            // ORGANISER
+            {/* ORGANISER */}
             <div>
               <span>ORGANISER</span>
 
@@ -199,7 +198,7 @@ export default async function EventPage({
               </strong>
             </div>
 
-            // TICKETS
+            {/* TICKETS */}
             <div>
               <span>TICKETS</span>
 
@@ -229,17 +228,10 @@ export default async function EventPage({
             </div>
           </div>
 
-          // EVENT ACTIONS
+          {/* EVENT ACTIONS */}
           <EventActions event={event} />
         </div>
       </div>
     </main>
   );
-}
-*/
-
-import { ComingSoon } from "@/components/ComingSoon";
-
-export default function EventPage() {
-  return <ComingSoon />;
 }

@@ -1,5 +1,4 @@
 
-/*
 "use client";
 
 import { useState } from "react";
@@ -311,11 +310,4 @@ export default function PlansPage() {
       </div>
     </main>
   );
-}
-*/
-
-import { ComingSoon } from "@/components/ComingSoon";
-
-export default function PlansPage() {
-  return <ComingSoon />;
 }

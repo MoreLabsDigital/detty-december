@@ -1,5 +1,3 @@
-/*
-
 import { supabase } from "@/lib/supabase";
 
 export const dynamic = "force-dynamic";
@@ -63,11 +61,4 @@ export default async function TestSupabase() {
       )}
     </main>
   );
-}
-*/
-
-import { ComingSoon } from "@/components/ComingSoon";
-
-export default function TestSupabase() {
-  return <ComingSoon />;
 }

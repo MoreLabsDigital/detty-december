@@ -1,5 +1,4 @@
 
-/*
 "use client";
 
 import { useMemo, useState, Suspense } from "react";
@@ -107,11 +106,4 @@ export default function Explore() {
       <ExploreContent />
     </Suspense>
   );
-}
-*/
-
-import { ComingSoon } from "@/components/ComingSoon";
-
-export default function Explore() {
-  return <ComingSoon />;
 }

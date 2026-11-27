@@ -1,4 +1,3 @@
-/*
 import "./arcade.css";
 import "@/components/arcade/arcade-promo.css";
 import type { Metadata } from "next";
@@ -21,11 +20,4 @@ export default function PlayPage() {
       <SnakeGame />
     </main>
   );
-}
-*/
-
-import { ComingSoon } from "@/components/ComingSoon";
-
-export default function PlayPage() {
-  return <ComingSoon />;
 }
